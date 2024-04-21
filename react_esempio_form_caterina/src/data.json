@@ -1,0 +1,20 @@
+{"domande":[   
+    {
+        "id":"1",
+        "domanda":"chi è il presidente?",
+        "risposte":["meloni","mattarella","salvini"],
+        "corretta":"meloni"
+    },
+    {
+        "id":"2",
+        "domanda":"In quale anno finirà il mondo?",
+        "risposte":["2012","2025","1990"],
+        "corretta":"2012"
+    },
+    {
+        "id":"3",
+        "domanda":"di che colore è il sole?",
+        "risposte":["giallo","verde","rosso"],
+        "corretta":"giallo"
+    }
+]}
