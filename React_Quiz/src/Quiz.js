@@ -3,13 +3,21 @@ import { useState } from 'react';
 import data from "./data.json";
 
 
-function Winner({fine,risposta}){
+function Winner({fine,risposte}){
+  var punti =0
+  var errori= []
   if(fine){
-    if(risposta==="meloni")
-      return <p> hai indovinato</p>
-    else
-      return <p> hai sbagliato</p>
+    for (var i=0;i<risposte.length;i++){
+      if (risposte[i]===data.domande[i].corretta)
+        punti++;
+      else
+        errori.push(<p>la domanda {i+1} è sbagliata, la risposta corretta è: <b>{data.domande[i].corretta}</b> </p>)
+    }
   }
+  return <>
+    <p> Totalizzati {punti} punti</p>
+    {errori.map((errore)=> {return errore })}
+  </>
 
 }
 
@@ -98,7 +106,7 @@ export default function Quiz() {
     <p> Selected answer <strong>{answerArray}</strong></p>
     <p> stato: <strong>{fine}</strong></p>
 
-    <Winner fine={fine} risposta={answerArray}/>
+    <Winner fine={fine} risposte={answerArray}/>
     
     </>;
   }
