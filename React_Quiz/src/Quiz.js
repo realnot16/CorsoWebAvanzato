@@ -13,29 +13,33 @@ function Winner({fine,risposta}){
 
 }
 
-function Opzione({daVisualizzare,statoQuiz,option}){
+function Opzione({daVisualizzare,statoQuiz,option, id, arrayRisp}){
   return(
   <>
       <input
       type="radio"
+      id={id}
       value={daVisualizzare}
       onChange={option}
       disabled={statoQuiz===1}
+      checked= {arrayRisp[id]===daVisualizzare}
       
     /><label>{daVisualizzare}</label><br/>
   </>)
 }
 
-function Domanda({domanda,risposte,statoQuiz,option}){
+function Domanda({domanda,risposte,statoQuiz,option,id, arrayRisp}){
   return (
     <>
       <p>{domanda}</p>
       {risposte.map((risposta)=>{
         return(
       <Opzione 
+        id = {id}
         daVisualizzare={risposta} 
         statoQuiz={statoQuiz}
         option={option}
+        arrayRisp = {arrayRisp}
          />)
     })}
     </>
@@ -55,26 +59,23 @@ export default function Quiz() {
 
   //QUESTA FUNZIONE AGGIORNA LA RISPOSTA, QUANDO VIENE CLICCATO UN RADIO BUTTON
   const onOptionChange = e => {
-    answ=answerArray
-    answ.append(e.target.value)
+    const answ=answerArray.slice()
+    answ[e.target.id]=e.target.value
     SetAnswer(answ)
   }
     
     return <>
-    
-    { 
-    //CREO DOMANDE
-    data.domande.map((singolaDomanda)=>{
-      return (
-      <Domanda 
-        domanda={singolaDomanda.domanda} 
-        risposte={singolaDomanda.risposte} 
-        corretta={singolaDomanda.corretta}
+  
+      <Domanda
+        id = { data.domande[idDomanda].id}
+        domanda={data.domande[idDomanda].domanda} 
+        risposte={data.domande[idDomanda].risposte} 
+        corretta={data.domande[idDomanda].corretta}
         statoQuiz={fine}
         option={onOptionChange}
-      />)
-    })}
-
+        arrayRisp= {answerArray}
+      />
+    
     <input
       type="button"
       value="Clicca qui per controllare"
