@@ -40,9 +40,10 @@ function Domanda({domanda,risposte,statoQuiz,option,id, arrayRisp}){
   return (
     <>
       <p>{domanda}</p>
-      {risposte.map((risposta)=>{
+      {risposte.map((risposta,i)=>{
         return(
-      <Opzione 
+      <Opzione
+        key={i}
         id = {id}
         daVisualizzare={risposta} 
         statoQuiz={statoQuiz}
