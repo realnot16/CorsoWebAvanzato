@@ -13,11 +13,12 @@ function Winner({fine,risposte}){
       else
         errori.push(<p>la domanda {i+1} è sbagliata, la risposta corretta è: <b>{data.domande[i].corretta}</b> </p>)
     }
-  }
-  return <>
+    return <>
     <p> Totalizzati {punti} punti</p>
     {errori.map((errore)=> {return errore })}
-  </>
+    </>
+  }
+
 
 }
 
@@ -29,7 +30,7 @@ function Opzione({daVisualizzare,statoQuiz,option, id, arrayRisp}){
       id={id}
       value={daVisualizzare}
       onChange={option}
-      disabled={statoQuiz===1}
+      disabled={statoQuiz===true}
       checked= {arrayRisp[id]===daVisualizzare}
       
     /><label>{daVisualizzare}</label><br/>
@@ -88,7 +89,7 @@ export default function Quiz() {
     <input
       type="button"
       value="Clicca qui per controllare"
-      onClick={() => {setFine(1)}} 
+      onClick={() => {setFine(true)}} 
     />
     <br />
     <input
