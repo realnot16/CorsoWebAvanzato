@@ -24,12 +24,12 @@ function Navbar() {
           {/* logo */}
 
           <a href='#home' className={`${styles.logo}`}>Dev. </a>
-          <ul className={`${styles.navMenu} ${isActive ? styles.active : ''}`}>
+          <ul className={`${styles.navMenu}`}>
             <li onClick={removeActive}>
-              <Link to="/dashboard" className={`${styles.navLink}`}>Dashboard</Link>
+              <Link to="/dashboard">Dashboard</Link>
             </li>
             <li onClick={removeActive}>
-            <Link to="/quiz" className={`${styles.navLink}`}>Quiz</Link>
+            <Link to="/quiz">Quiz</Link>
             </li>
           </ul>
           <div className={`${styles.hamburger} ${isActive ? styles.active : ''}`}  onClick={toggleActiveClass}>

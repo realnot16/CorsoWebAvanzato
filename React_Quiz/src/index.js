@@ -12,18 +12,16 @@ const root = createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>
     <BrowserRouter>
+
+
     <Navbar />
 
-    
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Layout />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="quiz" element={<Quiz />} />
         </Route>
       </Routes>
-
-      
 
 
     </BrowserRouter>
