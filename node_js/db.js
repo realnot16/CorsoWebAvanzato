@@ -46,6 +46,45 @@ return new Promise((resolve,reject)=>{
 
 }
 
+//GET QUIZ LIST
+exports.getQuizList= function(){
+  var query = "SELECT * FROM quiz;"
+  return new Promise((resolve,reject)=>{
+    con.query(query, (err, records) => {
+      if (err){
+        console.log("problem: "+err)
+        return reject(err)
+      } 
+      else {
+        console.log("db percentuale call success")
+        return resolve(records)
+      }
+      //console.log('Data fetched:', records);
+    });
+  });
+  }
+
+  //GET ELENCO DOMANDE
+  exports.getDomande= function(codQuiz){
+    
+    var query = "  SELECT * from domande WHERE codQuiz="+codQuiz+";"
+    console.log(query)
+    return new Promise((resolve,reject)=>{
+      con.query(query, (err, records) => {
+        if (err){
+          console.log("problem: "+err)
+          return reject(err)
+        } 
+        else {
+          console.log("db percentuale call success")
+          return resolve(records)
+        }
+        //console.log('Data fetched:', records);
+      });
+    });
+    }
+
+
 
 //GET BUILDING INFO
 exports.getBuilding = function (level,name){
