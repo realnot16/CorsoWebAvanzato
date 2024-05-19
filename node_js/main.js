@@ -1,0 +1,68 @@
+const express = require('express')
+
+var dt = require('./db.js');
+
+const app = express()
+const port = 3000
+
+dt.dbConnection()
+
+app.get('/', (req, res) => {
+    
+  res.send("hello world")
+  
+})
+
+ app.get('/errori', async (req, res) => {
+  console.log( await dt.percErrori("poldi@gmail.com"))
+  res.send("eseguo una query")
+  
+})
+
+app.get('/getError', (req, res) => {
+    res.send("errori nei quiz dato qualche cosa")
+    
+  })
+
+app.get('/getDomande/:codquiz', async (req, res) => {
+  var domande = await dt.getDomande(req.params.codquiz)
+  console.log(domande)
+
+  var data= {}
+
+  console.log("STAMPA RISULTATI")
+  data["domande"] = []
+  for (var i=0; i< domande.length;i++){
+    data["domande"][i] = {
+      "id":domande[i].codDomanda,
+      "domanda":domande[i].testoDomanda,
+      "risposte": [domande[i].risposta1,domande[i].risposta2,domande[i].risposta3,domande[i].risposta4],
+      "corretta": domande[i].rispostaCorretta
+    }
+  }
+  
+  res.json(data)
+  })
+
+  app.get('/', (req, res) => {
+    res.send("hello world")
+    
+  })
+
+  //API CALL PER OTTENERE LISTA DI QUIZ
+app.get('/getQuizList', async (req, res)=> {
+    var quizList = await dt.getQuizList()
+    var data= {}
+    console.log("STAMPA RISULTATI")
+    for (var i=0; i< quizList.length;i++){
+      data[quizList[i].codQuiz] = { "numeroDomande" : quizList[i].numeroDomande , "tempoSvolgimento" : quizList[i].tempoSvolgimento}
+    }
+    console.log("variabile di tipo: "+typeof(data))
+    console.log(data)
+    res.json(data)
+    
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})

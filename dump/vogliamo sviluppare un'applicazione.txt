@@ -1,0 +1,14 @@
+vogliamo sviluppare un'applicazione che consenta, in seguito ad un login, di svolgere una serie di quiz.
+Ogni quiz è caratterizzato da un tempo di svolgimento, un numero di domande variabile, ciascuna con 4 risposte e con una categoria di appartenenza.
+La base di dati dovrà memorizzare le informazioni sugli utenti registrati. In particolare, occorrerà memorizzare una password, un nome utente, una mail associata dove ricevere i risultati ed il numero di anni.
+Ogni utente, in seguito al login avrà 2 opzioni:
+-selezionare, da un elenco di quiz, il quiz da svolgere.
+-selezionare una dashboard che conterrà le seguenti informazioni:
+	-numero di quiz svolti
+	-numero di quiz per la quale si è passati (<2 errori)
+	-percentuale di errori media
+	-il quiz con ris migliore
+	-il quiz con ris peggiore
+	-l'elenco delle categorie delle domande, in ordine decrescente in base ai punteggi conseguiti
+
+
