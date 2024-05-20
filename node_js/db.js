@@ -7,7 +7,7 @@ exports.dbConnection = function () {
     con = mysql.createConnection({
       user: 'root',
       password: 'root',
-      host: 'localhost',
+      host: '192.168.2.38',
       port     : '3306',
       database: "test"
   });

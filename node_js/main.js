@@ -1,4 +1,6 @@
 const express = require('express')
+var cors = require('cors')
+const bodyParser = require("body-parser");
 
 var dt = require('./db.js');
 
@@ -7,10 +9,27 @@ const port = 3000
 
 dt.dbConnection()
 
-app.get('/', (req, res) => {
-    
-  res.send("hello world")
+var jsonParser = bodyParser.json()
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+app.use(cors())
+
+
+app.post("/",jsonParser, (req, res) => {
+  console.log("Ricevuto una richiesta POST");
+  // contenuto della richiesta
+  console.log(req.body);
+  // username
+  console.log(req.body.user);
+  // password
+  console.log(req.body.pass);  
+  res.send("hello world POST")
   
+})
+
+app.get('/', (req, res) => {
+
+   res.send("HELLO WORLD")
 })
 
  app.get('/errori', async (req, res) => {
@@ -52,10 +71,10 @@ app.get('/getDomande/:codquiz', async (req, res) => {
   //API CALL PER OTTENERE LISTA DI QUIZ
 app.get('/getQuizList', async (req, res)=> {
     var quizList = await dt.getQuizList()
-    var data= {}
+    var data= []
     console.log("STAMPA RISULTATI")
     for (var i=0; i< quizList.length;i++){
-      data[quizList[i].codQuiz] = { "numeroDomande" : quizList[i].numeroDomande , "tempoSvolgimento" : quizList[i].tempoSvolgimento}
+      data.push( { "id": quizList[i].codQuiz, "numeroDomande" : quizList[i].numeroDomande , "tempoSvolgimento" : quizList[i].tempoSvolgimento})
     }
     console.log("variabile di tipo: "+typeof(data))
     console.log(data)

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import data from "./data.json";
+import Fetch from "./Fetch";
 
 
 function Winner({fine,risposte}){
@@ -110,6 +111,7 @@ export default function Quiz() {
 
     <Winner fine={fine} risposte={answerArray}/>
     
+    <Fetch/>
     </>;
   }
   
