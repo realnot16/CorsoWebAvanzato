@@ -1,30 +1,31 @@
 const express = require('express')
-var cors = require('cors')
-const bodyParser = require("body-parser");
+const cors = require('cors')
+const bodyParser = require("body-parser"); //---------------JSON PARSER
 
 var dt = require('./db.js');
 
 const app = express()
-const port = 3000
+const port = 3001
 
 dt.dbConnection()
 
-var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.json()      //---------------JSON PARSER
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.use(cors())
 
 
-app.post("/",jsonParser, (req, res) => {
-  console.log("Ricevuto una richiesta POST");
+app.post("/getQuizDone",jsonParser, async (req, res) => {     //---------------JSON PARSER
+  console.log("Ricevuto una richiesta POST per getQuizDone");
   // contenuto della richiesta
   console.log(req.body);
-  // username
-  console.log(req.body.user);
-  // password
-  console.log(req.body.pass);  
-  res.send("hello world POST")
-  
+  // email
+  console.log(req.body.email);
+
+  var result = await dt.getQuizDone(req.body.email) 
+  console.log("result ---")
+  console.log(result)
+  res.json(result)
 })
 
 app.get('/', (req, res) => {

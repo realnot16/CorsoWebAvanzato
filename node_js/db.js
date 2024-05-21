@@ -7,7 +7,7 @@ exports.dbConnection = function () {
     con = mysql.createConnection({
       user: 'root',
       password: 'root',
-      host: '192.168.2.38',
+      host: 'localhost',
       port     : '3306',
       database: "test"
   });
@@ -57,6 +57,24 @@ exports.getQuizList= function(){
       } 
       else {
         console.log("db percentuale call success")
+        return resolve(records)
+      }
+      //console.log('Data fetched:', records);
+    });
+  });
+  }
+
+  //GET QUIZ DONE BY ONE USER
+exports.getQuizDone= function(email){
+  var query = "SELECT count(*) as conteggio FROM svolgimento_quiz WHERE email='"+email+"'"
+  return new Promise((resolve,reject)=>{
+    con.query(query, (err, records) => {
+      if (err){
+        console.log("problem: "+err)
+        return reject(err)
+      } 
+      else {
+      console.log("db getQuizDone call success")
         return resolve(records)
       }
       //console.log('Data fetched:', records);
