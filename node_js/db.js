@@ -47,8 +47,8 @@ return new Promise((resolve,reject)=>{
 }
 
 //GET QUIZ LIST
-exports.getQuizList= function(){
-  var query = "SELECT * FROM quiz;"
+exports.getQuizList= function(user){
+  var query = "SELECT * FROM test.quiz;"
   return new Promise((resolve,reject)=>{
     con.query(query, (err, records) => {
       if (err){
@@ -62,9 +62,9 @@ exports.getQuizList= function(){
       //console.log('Data fetched:', records);
     });
   });
-  }
+}
 
-  //GET QUIZ DONE BY ONE USER
+//GET QUIZ DONE BY ONE USER
 exports.getQuizDone= function(email){
   var query = "SELECT count(*) as conteggio FROM svolgimento_quiz WHERE email='"+email+"'"
   return new Promise((resolve,reject)=>{

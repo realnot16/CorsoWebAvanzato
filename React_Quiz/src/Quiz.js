@@ -3,7 +3,7 @@ import { useState } from 'react';
 import data from "./data.json";
 
 import Fetch from "./Fetch";
-
+import QuizList from './QuizList';
 
 function Winner({fine,risposte}){
   var punti =0
@@ -60,7 +60,8 @@ function Domanda({domanda,risposte,statoQuiz,option,id, arrayRisp}){
 
 
 export default function Quiz() {
-  
+  // QUIZ IN USO
+  const [quiz,setQuiz] = useState()
 
   // UNO STATO PER LE RISPOSTE
   const [answerArray,SetAnswer] = useState([])
@@ -75,44 +76,65 @@ export default function Quiz() {
     answ[e.target.id]=e.target.value
     SetAnswer(answ)
   }
+
+  function changeQuiz(nquiz) {
+      //IMPOSTO UN NUOVO QUIZ
+      console.log("IMPOSTO IL QUIZ....."+nquiz)
+      setQuiz(nquiz)
+  }
     
     return <>
-  
-      <Domanda
-        id = { data.domande[idDomanda].id}
-        domanda={data.domande[idDomanda].domanda} 
-        risposte={data.domande[idDomanda].risposte} 
-        corretta={data.domande[idDomanda].corretta}
-        statoQuiz={fine}
-        option={onOptionChange}
-        arrayRisp= {answerArray}
-      />
-    
-    <input
-      type="button"
-      value="Clicca qui per controllare"
-      onClick={() => {setFine(true)}} 
-    />
-    <br />
-    <input
-      type="button"
-      value="AVANTI"
-      disabled={idDomanda===2}
-      onClick={() => {setidDomanda(idDomanda+1)}} 
-    />
-        <input
-      type="button"
-      value="INDIETRO"
-      disabled={idDomanda===0}
-      onClick={() => {setidDomanda(idDomanda-1)}} 
-    />
+      <table style={{width:"100%"}}>
+      <tbody>
+        <tr>
+          <td style={{width:"75%"}}>
+            {/*QUI INSERISCO LA RENDERIZZAZIONE DEL QUIZ*/}
 
-    <p> Selected answer <strong>{answerArray}</strong></p>
-    <p> stato: <strong>{fine}</strong></p>
+            <Domanda
+              id = { data.domande[idDomanda].id}
+              domanda={data.domande[idDomanda].domanda} 
+              risposte={data.domande[idDomanda].risposte} 
+              corretta={data.domande[idDomanda].corretta}
+              statoQuiz={fine}
+              option={onOptionChange}
+              arrayRisp= {answerArray}
+            />
+          
+            <input
+              type="button"
+              value="Clicca qui per controllare"
+              onClick={() => {setFine(true)}} 
+            />
+            <br />
+            <input
+              type="button"
+              value="AVANTI"
+              disabled={idDomanda===2}
+              onClick={() => {setidDomanda(idDomanda+1)}} 
+            />
+                <input
+              type="button"
+              value="INDIETRO"
+              disabled={idDomanda===0}
+              onClick={() => {setidDomanda(idDomanda-1)}} 
+            />
 
-    <Winner fine={fine} risposte={answerArray}/>
-    
-    <Fetch/>
+            <p> Selected answer <strong>{answerArray}</strong></p>
+            <p> stato: <strong>{fine}</strong></p>
+
+            <Winner fine={fine} risposte={answerArray}/>
+          </td>
+          <td>
+            {/*QUI INSERISCO L'ELENCO DEI QUIZ*/}
+            <h1> SELEZIONA UN QUIZ</h1>
+            <QuizList
+            onClickHandling={() => {changeQuiz(5)}}
+            />
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
     </>;
   }
   

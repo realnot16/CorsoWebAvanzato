@@ -10,7 +10,6 @@ import Layout from "./Layout"
 
 const root = createRoot(document.getElementById("root"));
 root.render(
-  <StrictMode>
     <BrowserRouter>
 
 
@@ -26,5 +25,4 @@ root.render(
 
     </BrowserRouter>
 
-  </StrictMode>
 );

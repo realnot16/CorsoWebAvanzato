@@ -7,12 +7,12 @@ export default function Fetch() {
 
   //CHIAMATA API CON GET
   useEffect(()=>{
-    /*fetch("http://localhost:3001/getQuizList",{method: "get"}).then(
+    fetch("http://localhost:3001/getQuizList",{method: "get"}).then(
       (res) => {
                 return res.json();}).then(
                                     (data) => {
                                     console.log(data);
-                                    setQuiz(data) });*/
+                                    setQuiz(data) });
   },[])
 
   
@@ -30,8 +30,8 @@ export default function Fetch() {
       (res) => {
                 return res.json();}).then(
                                     (data) => {
-                                    console.log(data);
-                                    setCount(data) });
+                                    console.log("risultato"+data[0]["conteggio"]);
+                                    setCount(data[0]["conteggio"]) });
   },[])
 
   return(  
@@ -41,7 +41,7 @@ export default function Fetch() {
       <p>quiz n: {quiz.id}, contiene {quiz.numeroDomande} domande e dura {quiz.tempoSvolgimento} </p>
       </>)
     })}
-    <p>l'utente ha svolto {count[0].conteggio} quiz</p>
+    <p>l'utente ha svolto {count} quiz</p>
     </>
   )
 }

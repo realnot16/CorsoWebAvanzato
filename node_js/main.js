@@ -71,16 +71,10 @@ app.get('/getDomande/:codquiz', async (req, res) => {
 
   //API CALL PER OTTENERE LISTA DI QUIZ
 app.get('/getQuizList', async (req, res)=> {
-    var quizList = await dt.getQuizList()
-    var data= []
-    console.log("STAMPA RISULTATI")
-    for (var i=0; i< quizList.length;i++){
-      data.push( { "id": quizList[i].codQuiz, "numeroDomande" : quizList[i].numeroDomande , "tempoSvolgimento" : quizList[i].tempoSvolgimento})
-    }
-    console.log("variabile di tipo: "+typeof(data))
-    console.log(data)
-    res.json(data)
-    
+  var listaQuiz = await dt.getQuizList()
+  console.log(listaQuiz)
+
+  res.json(listaQuiz)
 })
 
 app.listen(port, () => {
