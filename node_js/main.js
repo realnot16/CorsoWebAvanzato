@@ -14,7 +14,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.use(cors())
 
-
+//Restituisce il numero di quiz svolti dall'utente
 app.post("/getQuizDone",jsonParser, async (req, res) => {     //---------------JSON PARSER
   console.log("Ricevuto una richiesta POST per getQuizDone");
   // contenuto della richiesta
@@ -53,14 +53,15 @@ app.get('/getDomande/:codquiz', async (req, res) => {
   console.log("STAMPA RISULTATI")
   data["domande"] = []
   for (var i=0; i< domande.length;i++){
-    data["domande"][i] = {
+    data["domande"].push({
       "id":domande[i].codDomanda,
       "domanda":domande[i].testoDomanda,
       "risposte": [domande[i].risposta1,domande[i].risposta2,domande[i].risposta3,domande[i].risposta4],
       "corretta": domande[i].rispostaCorretta
-    }
+    })
   }
-  
+  console.log("risultato chiama getDomande")
+  console.log(data)
   res.json(data)
   })
 

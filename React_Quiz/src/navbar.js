@@ -2,9 +2,6 @@ import { useState } from 'react'
 import  styles from './Navbar.module.css';
 import { Link } from 'react-router-dom';
 
-import Dashboard from './Dashboard';
-import Quiz from "./Quiz"
-
 function Navbar() {
   // adding the states 
   const [isActive, setIsActive] = useState(false);

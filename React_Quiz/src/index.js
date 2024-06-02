@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles.css";
 
-import Quiz from "./Quiz";
+import Game from "./Game";
 import Navbar from "./Navbar"
 import Dashboard from "./Dashboard"
 import Layout from "./Layout"
@@ -18,7 +18,7 @@ root.render(
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="quiz" element={<Quiz />} />
+          <Route path="quiz" element={<Game />} />
         </Route>
       </Routes>
 
