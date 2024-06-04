@@ -1,6 +1,4 @@
 import { useState } from 'react';
-
-
 import QuizList from './QuizList';
 import QuizFunction from './Quiz'
 
@@ -14,9 +12,9 @@ export default function Quiz() {
       console.log("IMPOSTO IL QUIZ....."+nquiz)
       setnQuiz(nquiz)
   }
-    
     return <>
-      <table style={{width:"100%"}}>
+
+      <table style={{width:"100%", backgroundColor:"yellow"}}>
       <tbody>
         <tr>
           <td style={{width:"75%"}}>
@@ -27,9 +25,7 @@ export default function Quiz() {
           <td>
             {/*QUI INSERISCO L'ELENCO DEI QUIZ*/}
             <h1> SELEZIONA UN QUIZ</h1>
-            <QuizList
-            onClickHandling={changeQuiz}
-            />
+            <QuizList onClickHandling={changeQuiz}/>
           </td>
         </tr>
         </tbody>

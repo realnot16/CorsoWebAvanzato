@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 export default function QuizList({onClickHandling}) {
     const [quizList, setQuizList] = useState([]);
 
+    //ACQUISICO I DATI
     useEffect(()=>{fetch("http://localhost:3001/getQuizList",{method: "get"}).then(
       (res) => {
                 return res.json();}).then(
@@ -11,6 +12,7 @@ export default function QuizList({onClickHandling}) {
                                     setQuizList(data) })},[])
     return (
     <>
+    {/*RENDERIZZO I DATI ACQUISITI */}
         {quizList.map((quiz)=>{
 
             return (<div key={quiz.codQuiz}>

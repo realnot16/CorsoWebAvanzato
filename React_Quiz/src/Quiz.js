@@ -70,6 +70,7 @@ import { useState, useEffect } from 'react';
     const [fine,setFine] = useState(0)
     // UNO STATO PER MEMORIZZARE LE DOMANDE VISUALIZZATE
     const [data,setData] = useState()
+
     // UNO STATO PER CAPIRE SE LA FETCH è CONCLUSA
     const [loading, setLoading] = useState(true); // Stato per il caricamento
 
