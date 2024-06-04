@@ -59,7 +59,7 @@ app.get('/getDomande/:codquiz', async (req, res) => {
   data["domande"] = []
   for (var i=0; i< domande.length;i++){
     data["domande"].push({
-      "id":domande[i].codDomanda,
+      "id":i,
       "domanda":domande[i].testoDomanda,
       "risposte": [domande[i].risposta1,domande[i].risposta2,domande[i].risposta3,domande[i].risposta4],
       "corretta": domande[i].rispostaCorretta

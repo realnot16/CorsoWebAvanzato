@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
   //option -> contiene la funzione per aggiornare l'opzione selezionata
   //id -> contiene l'id della domanda
   //check -> vero o falso. Serve per capire se questa è la risposta selezionata. In caso vero, appare il pallino pieno
-  function Opzione({daVisualizzare,statoQuiz,option, check}){
+  function Opzione({daVisualizzare,statoQuiz,option, id, check}){
     return(
     <>
         <input
@@ -16,6 +16,7 @@ import { useState, useEffect } from 'react';
         onChange={option}
         disabled={statoQuiz===true}
         checked= {check}
+        id= {id}
         
       /><label>{daVisualizzare}</label><br/>
     </>)
@@ -41,6 +42,7 @@ import { useState, useEffect } from 'react';
           daVisualizzare={risposta} 
           statoQuiz={statoQuiz}
           option={option}
+          id = {id}
           check = {arrayRisp[id]===risposta} //Verifico se la risposta associata all'id è uguale a quella in esame.
            />)
       })}
@@ -53,9 +55,7 @@ import { useState, useEffect } from 'react';
     if(fine){
     var punti =0
     var errori= []
-    
       for (var i=0;i<risposte.length;i++){
-        console.log("CICLO")
         console.log(data.domande[i].corretta)
         console.log(risposte[i])
         if (risposte[i]===data.domande[i].corretta)
@@ -93,8 +93,11 @@ import { useState, useEffect } from 'react';
         fetch("http://localhost:3001/getDomande/"+nquiz,{method: "get"}).then((res) => {return res.json();}).then(
                                         (data) => {
                                         console.log("Questions uploaded")
+
+                                        console.log(data)
                                         setData(data)   //imposta l'elenco delle domande
                                         setLoading(false); // Imposta lo stato di caricamento a false
+                                        SetAnswer([]) // Svuoto l'array delle risposte
                                       })
       }
     }
@@ -107,7 +110,7 @@ import { useState, useEffect } from 'react';
         const answ=answerArray.slice()
         console.log("IMPOSTO ANSWER")
         console.log(answ)
-        answ[e.target.id-1]=e.target.value  //l'id delle domande parte da uno, gli array partono da 0, quindi shifto tutto di 1
+        answ[e.target.id]=e.target.value 
         SetAnswer(answ)
         }
 
