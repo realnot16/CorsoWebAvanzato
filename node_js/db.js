@@ -2,6 +2,8 @@ const mysql = require("mysql2");
 var con
 
 
+
+//CREO UNA CONNESSIONE CON IL DATABASE
 exports.dbConnection = function () {
     // Config  database credential
     con = mysql.createConnection({
@@ -27,7 +29,7 @@ exports.dbConnection = function () {
   });
 }
 
-//GET percentuale errori dato un utente
+//Restituisce la percentuale di errori di un utente
 exports.percErrori= function(user){
 var query = "SELECT  avg(numero_errori/numeroDomande)*100 FROM svolgimento_quiz, quiz WHERE email='"+user+"' AND quiz.codQuiz = svolgimento_quiz.codQuiz;"
 return new Promise((resolve,reject)=>{
@@ -46,7 +48,7 @@ return new Promise((resolve,reject)=>{
 
 }
 
-//GET QUIZ LIST
+//Restituisce l'elenco dei quiz (GET QUIZ LIST)
 exports.getQuizList= function(user){
   var query = "SELECT * FROM test.quiz;"
   return new Promise((resolve,reject)=>{
@@ -64,7 +66,7 @@ exports.getQuizList= function(user){
   });
 }
 
-//GET QUIZ DONE BY ONE USER
+//Restituisce il numero di quiz svolti da un utente (GET QUIZ COUNT)
 exports.getQuizDone= function(email){
   var query = "SELECT count(*) as conteggio FROM svolgimento_quiz WHERE email='"+email+"'"
   return new Promise((resolve,reject)=>{
@@ -82,7 +84,7 @@ exports.getQuizDone= function(email){
   });
   }
 
-  //GET ELENCO DOMANDE
+  //Restituisce l'elenco delle domande di un quiz (GET DOMANDE)
   exports.getDomande= function(codQuiz){
     
     var query = "  SELECT * from domande WHERE codQuiz="+codQuiz+";"

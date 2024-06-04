@@ -1,21 +1,30 @@
+
+//Importo tutti i moduli necessari per l'utilizzo delle API
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require("body-parser"); //---------------JSON PARSER
 
+//Importo il modulo che contiene le chiamate al database
 var dt = require('./db.js');
 
+//Dichiaro la porta che utilizzerò per le API 
 const app = express()
 const port = 3001
 
+//Mi connetto al database
 dt.dbConnection()
 
 var jsonParser = bodyParser.json()      //---------------JSON PARSER
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+//Serve ad evitare problemi con la cors policy
 app.use(cors())
 
+
+//Di seguito le API realizzate
+
 //Restituisce il numero di quiz svolti dall'utente
-app.post("/getQuizDone",jsonParser, async (req, res) => {     //---------------JSON PARSER
+//Un esempio di API POST
+app.post("/getQuizDone",jsonParser, async (req, res) => {  
   console.log("Ricevuto una richiesta POST per getQuizDone");
   // contenuto della richiesta
   console.log(req.body);
@@ -28,29 +37,25 @@ app.post("/getQuizDone",jsonParser, async (req, res) => {     //---------------J
   res.json(result)
 })
 
-app.get('/', (req, res) => {
 
-   res.send("HELLO WORLD")
-})
-
- app.get('/errori', async (req, res) => {
-  console.log( await dt.percErrori("poldi@gmail.com"))
-  res.send("eseguo una query")
+//Restituisce la percentuale di errori realizzata da un utente
+ app.get('/errori:utente', async (req, res) => {
+  data =  await dt.percErrori(req.params.utente)
+  console.log( data)
+  res.json(data)
   
 })
 
-app.get('/getError', (req, res) => {
-    res.send("errori nei quiz dato qualche cosa")
-    
-  })
 
+//Restituisce l'elenco delle domande dato un id del quiz
 app.get('/getDomande/:codquiz', async (req, res) => {
   var domande = await dt.getDomande(req.params.codquiz)
   console.log(domande)
 
+  //Dopo aver letto le domande dal database, formatto il risultato in maniera tale 
+  //                                              che react possa utilizzarlo correttamente
   var data= {}
-
-  console.log("STAMPA RISULTATI")
+  console.log("formattazione getDomande:------------------")
   data["domande"] = []
   for (var i=0; i< domande.length;i++){
     data["domande"].push({
@@ -60,17 +65,12 @@ app.get('/getDomande/:codquiz', async (req, res) => {
       "corretta": domande[i].rispostaCorretta
     })
   }
-  console.log("risultato chiama getDomande")
   console.log(data)
   res.json(data)
   })
 
-  app.get('/', (req, res) => {
-    res.send("hello world")
-    
-  })
 
-  //API CALL PER OTTENERE LISTA DI QUIZ
+//Restituisce l'elenco dei quiz disponibili
 app.get('/getQuizList', async (req, res)=> {
   var listaQuiz = await dt.getQuizList()
   console.log(listaQuiz)
@@ -78,6 +78,7 @@ app.get('/getQuizList', async (req, res)=> {
   res.json(listaQuiz)
 })
 
+//Lancio il server sulla porta specificata
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

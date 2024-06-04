@@ -2,6 +2,7 @@ import { useState } from 'react'
 import  styles from './Navbar.module.css';
 import { Link } from 'react-router-dom';
 
+//la navbar del mio programma. Contiene una serie di funzionalità che garantiscono la dinamicità
 function Navbar() {
   // adding the states 
   const [isActive, setIsActive] = useState(false);
@@ -20,6 +21,8 @@ function Navbar() {
         <nav className={`${styles.navbar}`}>
           {/* logo */}
 
+          {/*Attraverso i componenti LINK posso specificare la routing per ogni punto dell'elenco.
+              Cliccando si potrà navigare verso la route specificata */}
           <a href='#home' className={`${styles.logo}`}>Dev. </a>
           <ul className={`${styles.navMenu}`}>
             <li onClick={removeActive}>
