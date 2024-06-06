@@ -37,6 +37,23 @@ app.post("/getQuizDone",jsonParser, async (req, res) => {
   res.json(result)
 })
 
+//chiamata API POST. Riceve i risultati dei quiz e li memorizza nel database
+app.post("/insertQuizResult",jsonParser, async (req, res) => {  
+  console.log("Ricevuto una richiesta POST per insertQuizResult");
+
+  // email
+  console.log(req.body.email);
+  console.log(req.body.codQuiz);
+  console.log(req.body.errori);
+
+  dt.insertQuizResult(req.body.email,req.body.codQuiz,req.body.errori)
+
+  // var result = await dt.getQuizDone(req.body.email) 
+  // console.log("result ---")
+  // console.log(result)
+  // res.json(result)
+})
+
 
 //Restituisce la percentuale di errori realizzata da un utente
  app.get('/errori:utente', async (req, res) => {

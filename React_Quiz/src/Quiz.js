@@ -51,22 +51,37 @@ import { useState, useEffect } from 'react';
   }
 
   //Funzione che, dato un array di risposte, analizza e calcola il risultato ottenuto
-  function Winner({fine,risposte,data}){
+  function Winner({fine,risposte,data, nquiz}){
     if(fine){
     var punti =0
     var errori= []
-      for (var i=0;i<risposte.length;i++){
-        console.log(data.domande[i].corretta)
-        console.log(risposte[i])
-        if (risposte[i]===data.domande[i].corretta)
-          punti++;
-        else
-          errori.push(<p key={i}>la domanda {i+1} è sbagliata, la risposta corretta è: <b>{data.domande[i].corretta}</b> </p>)
-      }
-      return <>
-      <p> Totalizzati {punti} punti</p>
-      {errori.map((errore)=> {return errore })}
-      </>
+    for (var i=0;i<risposte.length;i++){
+      console.log(data.domande[i].corretta)
+      console.log(risposte[i])
+      if (risposte[i]===data.domande[i].corretta)
+        punti++;
+      else
+        errori.push(<p key={i}>la domanda {i+1} è sbagliata, la risposta corretta è: <b>{data.domande[i].corretta}</b> </p>)
+    }
+
+    //creo un json che contiene l'esito del quiz
+    var result = { "codQuiz": nquiz, "email": "lucapa@gmail.com", "errori": errori.length}
+    console.log(result)
+
+    //invio l'esito del quiz attraverso una post
+    fetch("http://localhost:3001/insertQuizResult",{
+        method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify(result)
+    })
+
+    return <>
+    <p> Totalizzati {punti} punti</p>
+    {errori.map((errore)=> {return errore })}
+    </>
     }
   
   
@@ -88,6 +103,7 @@ import { useState, useEffect } from 'react';
 
     // Una funzione che esegue il fetch dell'elenco delle domande, dato l'id di un quiz
     function fetchDomande(nquiz) {
+
       //il fetch viene eseguito solo quando nquiz è un valore diverso da zero, quindi solo dopo aver premuto un pulsante
       if(nquiz>0){
         fetch("http://localhost:3001/getDomande/"+nquiz,{method: "get"}).then((res) => {return res.json();}).then(
@@ -96,8 +112,11 @@ import { useState, useEffect } from 'react';
 
                                         console.log(data)
                                         setData(data)   //imposta l'elenco delle domande
+                                        //Inizializzo il quiz impostando gli stati al loro lavore iniziale
                                         setLoading(false); // Imposta lo stato di caricamento a false
-                                        SetAnswer([]) // Svuoto l'array delle risposte
+                                        setidDomanda(0)
+                                        SetAnswer([])
+                                        setFine(0)
                                       })
       }
     }
@@ -163,6 +182,6 @@ import { useState, useEffect } from 'react';
     <p> stato: <strong>{fine}</strong></p>
 
     {/* componente Winner per valutare l'esito del quiz. */}
-    <Winner fine={fine} risposte={answerArray} data={data}/>
+    <Winner fine={fine} risposte={answerArray} data={data} nquiz={nquiz}/>
     </>
   }

@@ -66,6 +66,24 @@ exports.getQuizList= function(user){
   });
 }
 
+//inserisce i risultati di un quiz nel database
+exports.insertQuizResult= function(email,codQuiz,errori){
+  var query = "INSERT INTO svolgimento_quiz(email,codQuiz, numero_errori) VALUES ('"+email+"',"+codQuiz+","+errori+")"
+  return new Promise((resolve,reject)=>{
+    con.query(query, (err, records) => {
+      if (err){
+        console.log("problem: "+err)
+        return reject(err)
+      } 
+      else {
+      console.log("db getQuizDone call success")
+        return resolve(records)
+      }
+      //console.log('Data fetched:', records);
+    });
+  });
+  }
+
 //Restituisce il numero di quiz svolti da un utente (GET QUIZ COUNT)
 exports.getQuizDone= function(email){
   var query = "SELECT count(*) as conteggio FROM svolgimento_quiz WHERE email='"+email+"'"
