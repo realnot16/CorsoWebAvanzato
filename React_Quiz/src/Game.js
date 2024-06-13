@@ -17,6 +17,12 @@ export default function Game() {
       console.log("IMPOSTO IL QUIZ....."+nquiz)
       setnQuiz(nquiz)
   }
+
+  const quizListStyle = {
+    margin: "auto",
+    width: "50%",
+    padding: "10px"
+  };
     return <>
       {/* Creo una tabella di una riga e due celle per contenere i due componenti figlio */}
       <table style={{width:"100%", backgroundColor:"yellow"}}>
@@ -29,8 +35,11 @@ export default function Game() {
           </td>
           <td>
             {/*QUI INSERISCO L'ELENCO DEI QUIZ*/}
-            <h1> SELEZIONA UN QUIZ</h1>
+            <h1> ELENCO DEI QUIZ</h1>
+            <div style={quizListStyle} >
             <QuizList onClickHandling={changeQuiz}/>
+            </div>
+            
           </td>
         </tr>
         </tbody>

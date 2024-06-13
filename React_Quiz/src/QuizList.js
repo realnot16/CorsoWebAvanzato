@@ -22,10 +22,10 @@ export default function QuizList({onClickHandling}) {
         {quizList.map((quiz)=>{
 
             return (<div key={quiz.codQuiz}>
-            <p > questo è il quiz n {quiz.codQuiz}, che contiene {quiz.numeroDomande} domande</p>
-            {/*Creo un pulsante per ogni quiz, al quale passo la properties ereditatà dal componente game.
+
+           {/*Creo un pulsante per ogni quiz, al quale passo la properties ereditatà dal componente game.
                 quando clicco il pulsante, il valore di quiz.codQuiz viene inserito nello stato nQuiz del componente Game */}
-            <input type="button" value="CLICCAMI PER INIZIARE" onClick={() =>onClickHandling(quiz.codQuiz)}></input><br></br>
+            <input type="button" className='btn btn-outline-primary' value={"Quiz numero: "+quiz.codQuiz} onClick={() =>onClickHandling(quiz.codQuiz)}></input><br></br>
             <br/>
             </div>)
         })}

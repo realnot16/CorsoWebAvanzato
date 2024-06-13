@@ -30,8 +30,8 @@ exports.dbConnection = function () {
 }
 
 //Restituisce la percentuale di errori di un utente
-exports.percErrori= function(user){
-var query = "SELECT  avg(numero_errori/numeroDomande)*100 FROM svolgimento_quiz, quiz WHERE email='"+user+"' AND quiz.codQuiz = svolgimento_quiz.codQuiz;"
+exports.nErrori= function(){
+var query = "SELECT  count(codSvolgimento) as count FROM svolgimento_quiz  WHERE numero_errori=3"
 return new Promise((resolve,reject)=>{
   con.query(query, (err, records) => {
     if (err){
@@ -40,7 +40,7 @@ return new Promise((resolve,reject)=>{
     } 
     else {
       console.log("db percentuale call success")
-      return resolve(records[0])
+      return resolve(records)
     }
     //console.log('Data fetched:', records);
   });

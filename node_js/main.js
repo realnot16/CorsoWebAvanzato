@@ -5,7 +5,7 @@ const cors = require('cors')
 const bodyParser = require("body-parser"); //---------------JSON PARSER
 
 //Importo il modulo che contiene le chiamate al database
-var dt = require('./db.js');
+const dt = require('./db.js');
 
 //Dichiaro la porta che utilizzerò per le API 
 const app = express()
@@ -61,6 +61,13 @@ app.post("/insertQuizResult",jsonParser, async (req, res) => {
   console.log( data)
   res.json(data)
   
+})
+
+//Restituisce il numero di quiz con 3 errori
+app.get('/quiz3errori', async (req, res) => {
+  data =  await dt.nErrori()
+  console.log( data)
+  res.send(data)
 })
 
 

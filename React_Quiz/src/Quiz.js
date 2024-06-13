@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 
-
   //Questa funzione, date le properties, genera una riga di una domanda
   //daVisualizzare -> testo della domanda
   //statoQuiz -> se il quiz è finito o meno
@@ -10,15 +9,18 @@ import { useState, useEffect } from 'react';
   function Opzione({daVisualizzare,statoQuiz,option, id, check}){
     return(
     <>
+       <div className="col-sm-3">
         <input
         type="radio"
+        autocomplete="off"
         value={daVisualizzare}
         onChange={option}
         disabled={statoQuiz===true}
         checked= {check}
         id= {id}
         
-      /><label>{daVisualizzare}</label><br/>
+      /><label >{daVisualizzare}</label><br/>
+      </div>
     </>)
   }
   
@@ -33,7 +35,8 @@ import { useState, useEffect } from 'react';
   function Domanda({domanda,risposte,statoQuiz,option,id, arrayRisp}){
     return (
       <>
-        <p>{domanda}</p>
+        <p style={{textAlign:'center'}} className="fw-bold"> {domanda}</p>
+        <div className="row">
         {/* map delle risposte. per ogni risposta, creo un componente figlio Opzione */}
         {risposte.map((risposta,i)=>{
           return(
@@ -46,6 +49,9 @@ import { useState, useEffect } from 'react';
           check = {arrayRisp[id]===risposta} //Verifico se la risposta associata all'id è uguale a quella in esame.
            />)
       })}
+      </div>
+
+      
       </>
     )
   }
@@ -103,7 +109,6 @@ import { useState, useEffect } from 'react';
 
     // Una funzione che esegue il fetch dell'elenco delle domande, dato l'id di un quiz
     function fetchDomande(nquiz) {
-
       //il fetch viene eseguito solo quando nquiz è un valore diverso da zero, quindi solo dopo aver premuto un pulsante
       if(nquiz>0){
         fetch("http://localhost:3001/getDomande/"+nquiz,{method: "get"}).then((res) => {return res.json();}).then(
