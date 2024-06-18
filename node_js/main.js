@@ -37,6 +37,21 @@ app.post("/getQuizDone",jsonParser, async (req, res) => {
   res.json(result)
 })
 
+//Restituisce il l'elenco dei quiz svolti dall'utente
+//Un esempio di API POST
+app.post("/getListQuizDone",jsonParser, async (req, res) => {  
+  console.log("Ricevuto una richiesta POST per getListQuizDone");
+  // contenuto della richiesta
+  console.log(req.body);
+  // email
+  console.log(req.body.email);
+
+  var result = await dt.getListQuizDone(req.body.email) 
+  console.log("result ---")
+  console.log(result)
+  res.json(result)
+})
+
 //chiamata API POST. Riceve i risultati dei quiz e li memorizza nel database
 app.post("/insertQuizResult",jsonParser, async (req, res) => {  
   console.log("Ricevuto una richiesta POST per insertQuizResult");

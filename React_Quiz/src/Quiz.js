@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
   //id -> contiene l'id della domanda
   //check -> vero o falso. Serve per capire se questa è la risposta selezionata. In caso vero, appare il pallino pieno
   function Opzione({daVisualizzare,statoQuiz,option, id, check}){
+
     return(
     <>
        <div className="col-sm-3">
@@ -33,22 +34,37 @@ import { useState, useEffect } from 'react';
   // arrayRisp -> array contenente tutte le risposte del quiz. in combinazione con l'id della domanda,
                       //mi permette di verificare se la risposta individuata è uguale a quella passata al componente Opzione
   function Domanda({domanda,risposte,statoQuiz,option,id, arrayRisp}){
+
+    const radioButton = { 
+      padding: "12px 16px", 
+      borderRadius: "8px", 
+      margin: "8px", 
+      border: "2px solid #007BFF", 
+      background: "#fff", 
+      display: "flex", 
+      alignItems: "center", 
+      justifyContent: "center", 
+      width: "280px", 
+      cursor: "pointer", 
+      transition: 
+          "background-color 0.3s, color 0.3s", 
+  }
     return (
       <>
         <p style={{textAlign:'center'}} className="fw-bold"> {domanda}</p>
         <div className="row">
-        {/* map delle risposte. per ogni risposta, creo un componente figlio Opzione */}
-        {risposte.map((risposta,i)=>{
-          return(
-        <Opzione
-          key={i}
-          daVisualizzare={risposta} 
-          statoQuiz={statoQuiz}
-          option={option}
-          id = {id}
-          check = {arrayRisp[id]===risposta} //Verifico se la risposta associata all'id è uguale a quella in esame.
-           />)
-      })}
+            {/* map delle risposte. per ogni risposta, creo un componente figlio Opzione */}
+            {risposte.map((risposta,i)=>{
+              return(
+            <Opzione
+              key={i}
+              daVisualizzare={risposta} 
+              statoQuiz={statoQuiz}
+              option={option}
+              id = {id}
+              check = {arrayRisp[id]===risposta} //Verifico se la risposta associata all'id è uguale a quella in esame.
+              />)
+          })}
       </div>
 
       

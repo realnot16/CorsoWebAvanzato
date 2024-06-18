@@ -102,6 +102,24 @@ exports.getQuizDone= function(email){
   });
   }
 
+//Restituisce l'elenco dei quiz svolti da un utente (GET QUIZ DONE)
+exports.getListQuizDone= function(email){
+  var query = "SELECT codQuiz FROM test.svolgimento_quiz WHERE email='"+email+"';"
+  return new Promise((resolve,reject)=>{
+    con.query(query, (err, records) => {
+      if (err){
+        console.log("problem: "+err)
+        return reject(err)
+      } 
+      else {
+      console.log("db getQuizDone call success")
+        return resolve(records)
+      }
+      //console.log('Data fetched:', records);
+    });
+  });
+  }
+
   //Restituisce l'elenco delle domande di un quiz (GET DOMANDE)
   exports.getDomande= function(codQuiz){
     
