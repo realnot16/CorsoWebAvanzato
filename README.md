@@ -23,16 +23,19 @@ https://artemessaggio.comune.milano.it/it-new-media/network-skills-and-code-skil
    - Introduzione ai database relazionali
    - Concetti base di SQL
    - Query SQL: clausole WHERE e JOIN
+   - Cenni di database documentali
 
 5. **React**
    - Creazione di componenti
    - Passaggio di dati con Props
    - Gestione dello stato con Hook (`useState`, `useEffect`)
+   - Autenticazione client side
 
 6. **Node.js**
    - Concetti di server e API
    - Gestione delle richieste HTTP
    - Connessione al database
+   - Autenticazione server side
 
 7. **Fetch in React**
    - Recupero e gestione dei dati tramite API
