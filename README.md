@@ -1,8 +1,8 @@
 # Corso di Web Avanzato
 
-Benvenuti al **Corso di Web Avanzato**! Questo repository contiene tutto il materiale necessario per approfondire gli argomenti fondamentali dello sviluppo web full-stack. Al termine del corso, sarete in grado di creare un'applicazione web completa, partendo dal frontend fino alla gestione del backend e del database.
+Benvenuti al **Corso di Web Avanzato**! Questo repository contiene tutto il materiale utilizzato durante il corso
 
----
+https://artemessaggio.comune.milano.it/it-new-media/network-skills-and-code-skills/web-developer-avanzato
 
 ## 📚 Argomenti Trattati
 
