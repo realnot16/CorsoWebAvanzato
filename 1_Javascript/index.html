@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Interattivo</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1>Il Mio Primo Form</h1>
+        <p>Una breve descrizione del quiz interattivo.</p>
+    </header>
+
+    <main>
+        <form id="quizForm">
+            <!-- Campi per nome e cognome -->
+            <div>
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div>
+                <label for="cognome">Cognome:</label>
+                <input type="text" id="cognome" name="cognome" required>
+            </div>
+
+            <!-- Spazio per le domande -->
+            <div id="domande">
+                <div>
+                    <label for="domanda1">Domanda 1: Quanto fa 2+2?</label>
+                    <input type="text" id="domanda1" name="domanda1" required>
+                </div>
+                <div>
+                    <label for="domanda2">Domanda 2: Colore del cielo?</label>
+                    <input type="text" id="domanda2" name="domanda2" required>
+                </div>
+            </div>
+
+            <!-- Pulsante per inviare il form -->
+            <div>
+                <input type="button" onclick="checkQuiz()" value="INVIA">
+            </div>
+        </form>
+
+        <section>
+            <h2>Risultato del Quiz</h2>
+            <div id="esito"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Il Mio Primo Form</p>
+    </footer>
+
+    <!-- Script JS -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+
+@import "_reset.scss";
+
+.gotu-regular {
+    font-family: "Gotu", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+
+$fontstack: Gotu;
+$fontsize: 16px;
+$primary: lightskyblue;
+$primary_dark: darken(lightskyblue,40%);
+
+
+#container {
+    margin: auto;
+    max-width: 800px;
+}
+
+h1{
+    color: $primary;
+}
+
+nav {
+
+
+    background-color: red;
+    ul{
+        display: flex;
+        li{
+            display: inline-block; 
+            width:auto;
+            list-style: none;
+            background-color: $primary;
+            outline-style: solid;
+            outline-color: $primary_dark;
+            transition: outline-color 1s, background-color 1s;
+            &:hover{
+                outline-color: $primary;
+                background-color: $primary_dark;
+            }
+            a:hover{
+                font-weight: bold;
+            }
+        }
+
+    }
+
+}
